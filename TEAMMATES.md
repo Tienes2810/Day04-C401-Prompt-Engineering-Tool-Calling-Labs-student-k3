@@ -1,11 +1,11 @@
 ## Team Information
 
-| STT | Họ và tên | Mã học viên | Vai trò |
-|:---:|---|:---:|---|
-| 1 | Trần Tiến Dũng | 2A202601783 | Leader |
-| 2 | Lê Hoàng Việt | 2A202601543 | Member |
-| 3 | Nguyễn Thiên Tài | 2A202601849 | Member |
-| 4 | Nguyễn Tiến | 2A202601655 | Member |
+| STT | Họ và tên | Mã học viên |
+|:---:|---|:---:|
+| 1 | Trần Tiến Dũng | 2A202601783 |
+| 2 | Lê Hoàng Việt | 2A202601543 |
+| 3 | Nguyễn Thiên Tài | 2A202601849 |
+| 4 | Nguyễn Tiến | 2A202601655 |
 
 ---
 
