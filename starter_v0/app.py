@@ -19,7 +19,7 @@ TRANSCRIPTS_DIR = ROOT / "transcripts"
 load_lab_env(ROOT)
 
 st.set_page_config(
-    page_title="AI Research Agent — Lab 04",
+    page_title="Vin Researcher — Lab 04",
     page_icon="🤖",
     layout="wide",
 )
@@ -123,7 +123,7 @@ def run_agent_loop(
 
 
 def main():
-    st.title("🤖 AI Research Agent — Tool Evaluation Demo")
+    st.title("🤖 Vin Researcher — Academic & Technical Agent")
     st.caption("Lab 04: Prompt Engineering & Tool Calling Agent")
 
     # Sidebar setup
@@ -174,7 +174,7 @@ def main():
                         })
 
     # Chat Input
-    if user_input := st.chat_input("Hỏi Research Agent..."):
+    if user_input := st.chat_input("Hỏi Vin Researcher..."):
         # Append User Message
         st.session_state.messages.append({"role": "user", "content": user_input})
         with st.chat_message("user"):
