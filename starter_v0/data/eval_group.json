@@ -1,7 +1,272 @@
 {
   "dataset_id": "day04_v2_research_group",
   "dataset_role": "group",
-  "description": "Template để NHÓM tự viết đúng 10 case: 5 single-turn dùng query và 5 multi-turn dùng turns. Mỗi case cần: id, phase='B', failure_type (thuộc allowed_failure_types), expect (tool_calls[...] hoặc no_tool=true), và metadata.what_it_tests. File để trống có chủ đích vì mỗi nhóm phải tự thiết kế các case này.",
-  "allowed_failure_types": ["wrong_tool", "wrong_arg_value", "wrong_boundary", "unnecessary_tool", "out_of_scope", "missing_info"],
-  "cases": []
+  "description": "Bộ 10 eval cases thiết kế cho nhóm: 5 single-turn và 5 multi-turn kiểm thử tool mới repo_search, clarify boundary, out-of-scope và multiturn context.",
+  "allowed_failure_types": [
+    "wrong_tool",
+    "wrong_arg_value",
+    "wrong_boundary",
+    "unnecessary_tool",
+    "out_of_scope",
+    "missing_info"
+  ],
+  "cases": [
+    {
+      "id": "G01_repo_search_python",
+      "phase": "B",
+      "suite": "group",
+      "query": "Tìm các repo GitHub Python phổ biến nhất về LLM Agent",
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "repo_search",
+            "args": {
+              "query": "LLM Agent",
+              "language": "python",
+              "sort": "stars"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "routing_repo_search",
+        "difficulty": "medium",
+        "what_it_tests": "Tìm repository GitHub bằng ngôn ngữ Python → repo_search"
+      }
+    },
+    {
+      "id": "G02_repo_search_ts",
+      "phase": "B",
+      "suite": "group",
+      "query": "Tìm thư viện TypeScript cho AI Agent trên GitHub",
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "repo_search",
+            "args": {
+              "query": "AI Agent",
+              "language": "typescript"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "arg_language_repo_search",
+        "difficulty": "medium",
+        "what_it_tests": "Lọc ngôn ngữ TypeScript trong repo_search"
+      }
+    },
+    {
+      "id": "G03_missing_repo_query",
+      "phase": "B",
+      "suite": "group",
+      "query": "Tìm giúp mình vài repo GitHub tốt nhất",
+      "failure_type": "missing_info",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "clarify_missing_repo_query",
+        "difficulty": "medium",
+        "what_it_tests": "Thiếu chủ đề tìm kiếm repo → clarify"
+      }
+    },
+    {
+      "id": "G04_confirm_telegram_post",
+      "phase": "B",
+      "suite": "group",
+      "query": "Đăng bài viết từ link https://openai.com/blog/gpt-5 lên channel Telegram giúp mình",
+      "failure_type": "wrong_boundary",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "confirm_before_send",
+        "difficulty": "medium",
+        "what_it_tests": "Hành động gửi tin nhắn Telegram → xin xác nhận yes_no trước"
+      }
+    },
+    {
+      "id": "G05_out_of_scope_recipe",
+      "phase": "B",
+      "suite": "group",
+      "query": "Cho mình công thức nấu món phở bò truyền thống",
+      "failure_type": "out_of_scope",
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "metadata": {
+        "skill": "out_of_scope_cooking",
+        "difficulty": "easy",
+        "what_it_tests": "Câu hỏi nấu ăn ngoài phạm vi research agent → từ chối, không dùng tool"
+      }
+    },
+    {
+      "id": "G06_multiturn_clarify_repo",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Tìm giúp mình vài repo trên GitHub"
+        },
+        {
+          "role": "user",
+          "content": "Chủ đề RAG bằng Python"
+        }
+      ],
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "repo_search",
+            "args": {
+              "query": "RAG",
+              "language": "python"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "multiturn_clarify_repo",
+        "difficulty": "hard",
+        "what_it_tests": "Lượt 1 thiếu info -> lượt 2 điền thông tin RAG Python gọi repo_search"
+      }
+    },
+    {
+      "id": "G07_multiturn_repo_sort",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Tìm repo GitHub về vector database"
+        },
+        {
+          "role": "user",
+          "content": "Sắp xếp theo số sao (stars) nhé"
+        }
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "repo_search",
+            "args": {
+              "query": "vector database",
+              "sort": "stars"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "multiturn_repo_sort",
+        "difficulty": "medium",
+        "what_it_tests": "Lượt 2 bổ sung tham số sort=stars"
+      }
+    },
+    {
+      "id": "G08_multiturn_switch_to_repo",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Mọi người nói gì về LangChain trên Twitter?"
+        },
+        {
+          "role": "user",
+          "content": "Chuyển sang tìm repo GitHub về LangChain đi"
+        }
+      ],
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "repo_search",
+            "args": {
+              "query": "LangChain"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "multiturn_switch_to_repo",
+        "difficulty": "hard",
+        "what_it_tests": "Đổi từ Twitter social_search sang repo_search"
+      }
+    },
+    {
+      "id": "G09_multiturn_confirm_publish",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Tổng hợp các repo AI mới"
+        },
+        {
+          "role": "user",
+          "content": "Đăng báo cáo này lên channel Telegram"
+        }
+      ],
+      "failure_type": "wrong_boundary",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "multiturn_confirm_publish",
+        "difficulty": "medium",
+        "what_it_tests": "Lượt 2 yêu cầu đăng bài -> hỏi xác nhận yes_no"
+      }
+    },
+    {
+      "id": "G10_multiturn_out_of_scope",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Tìm repo GitHub về Reinforcement Learning"
+        },
+        {
+          "role": "user",
+          "content": "Sẵn tiện viết cho mình đoạn code giải phương trình bậc 2 bằng C++"
+        }
+      ],
+      "failure_type": "out_of_scope",
+      "expect": {
+        "no_tool": true
+      },
+      "metadata": {
+        "skill": "multiturn_out_of_scope",
+        "difficulty": "easy",
+        "what_it_tests": "Lượt 2 hỏi viết code C++ ngoài phạm vi -> từ chối không dùng tool"
+      }
+    }
+  ]
 }

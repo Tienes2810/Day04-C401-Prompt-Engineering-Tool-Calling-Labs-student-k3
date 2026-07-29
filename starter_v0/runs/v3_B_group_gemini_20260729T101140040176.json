@@ -1,0 +1,891 @@
+{
+  "run_id": "v3_B_group_gemini_20260729T101140040176",
+  "version": "v3",
+  "artifact_version": "v3+pc027f6489e4e+tdd6d1f6a34f8",
+  "prompt_hash": "c027f6489e4ee5795b39eb9b92eb2b7adff28966f164afdb46d8ddc4f0d9f211",
+  "tools_hash": "dd6d1f6a34f8dbb632dfa9e98d1b09344a5ae124b56bc91dc78adb4826ae0336",
+  "phase": "B",
+  "suite": "group",
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "system_prompt": "E:\\VinAI\\Lab\\Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student-k3\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "E:\\VinAI\\Lab\\Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student-k3\\starter_v0\\artifacts\\tools.yaml",
+  "eval_cases": "data\\eval_group.json",
+  "dataset_id": "day04_v2_research_group",
+  "dataset_role": "group",
+  "description": "Bộ 10 eval cases thiết kế cho nhóm: 5 single-turn và 5 multi-turn kiểm thử tool mới repo_search, clarify boundary, out-of-scope và multiturn context.",
+  "generated_at": "2026-07-29T10:11:40",
+  "summary": {
+    "total_cases": 10,
+    "measured_cases": 10,
+    "provider_error_cases": 0,
+    "passed_cases": 7,
+    "case_accuracy": 0.7,
+    "tool_routing_accuracy": 0.8,
+    "argument_accuracy": 0.7,
+    "multiturn_accuracy": 1.0,
+    "failure_counts": {
+      "missing_info": 1,
+      "wrong_boundary": 1,
+      "out_of_scope": 1
+    },
+    "observed_mismatch_counts": {
+      "missing_tool_call": 1,
+      "wrong_arg_value": 1,
+      "unexpected_tool_call": 1
+    }
+  },
+  "results": [
+    {
+      "id": "G01_repo_search_python",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "routing_repo_search",
+        "difficulty": "medium",
+        "what_it_tests": "Tìm repository GitHub bằng ngôn ngữ Python → repo_search"
+      },
+      "input": "Tìm các repo GitHub Python phổ biến nhất về LLM Agent",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "repo_search",
+            "args": {
+              "query": "LLM Agent",
+              "language": "python",
+              "sort": "stars"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "repo_search",
+            "args": {
+              "sort": "stars",
+              "language": "python",
+              "query": "LLM Agent"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "repo_search",
+          "args": {
+            "sort": "stars",
+            "language": "python",
+            "query": "LLM Agent"
+          },
+          "result": {
+            "error": null,
+            "message": null,
+            "item_count": 5,
+            "items": [
+              {
+                "name": "NousResearch/hermes-agent",
+                "description": "The agent that grows with you",
+                "stars": 221964,
+                "url": "https://github.com/NousResearch/hermes-agent",
+                "language": "Python"
+              },
+              {
+                "name": "langchain-ai/langchain",
+                "description": "The agent engineering platform.",
+                "stars": 142830,
+                "url": "https://github.com/langchain-ai/langchain",
+                "language": "Python"
+              },
+              {
+                "name": "Shubhamsaboo/awesome-llm-apps",
+                "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
+                "stars": 128544,
+                "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
+                "language": "Python"
+              },
+              {
+                "name": "browser-use/browser-use",
+                "description": "🌐 Make websites accessible for AI agents. Automate tasks online with ease.",
+                "stars": 107146,
+                "url": "https://github.com/browser-use/browser-use",
+                "language": "Python"
+              },
+              {
+                "name": "TauricResearch/TradingAgents",
+                "description": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+                "stars": 94894,
+                "url": "https://github.com/TauricResearch/TradingAgents",
+                "language": "Python"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G02_repo_search_ts",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "arg_language_repo_search",
+        "difficulty": "medium",
+        "what_it_tests": "Lọc ngôn ngữ TypeScript trong repo_search"
+      },
+      "input": "Tìm thư viện TypeScript cho AI Agent trên GitHub",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "repo_search",
+            "args": {
+              "query": "AI Agent",
+              "language": "typescript"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "repo_search",
+            "args": {
+              "sort": "stars",
+              "query": "AI agent",
+              "language": "typescript"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "repo_search",
+          "args": {
+            "sort": "stars",
+            "query": "AI agent",
+            "language": "typescript"
+          },
+          "result": {
+            "error": null,
+            "message": null,
+            "item_count": 5,
+            "items": [
+              {
+                "name": "langgenius/dify",
+                "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
+                "stars": 150602,
+                "url": "https://github.com/langgenius/dify",
+                "language": "TypeScript"
+              },
+              {
+                "name": "google-gemini/gemini-cli",
+                "description": "An open-source AI agent that brings the power of Gemini directly into your terminal.",
+                "stars": 106231,
+                "url": "https://github.com/google-gemini/gemini-cli",
+                "language": "TypeScript"
+              },
+              {
+                "name": "OpenHands/OpenHands",
+                "description": "🙌 OpenHands: AI-Driven Development",
+                "stars": 82438,
+                "url": "https://github.com/OpenHands/OpenHands",
+                "language": "TypeScript"
+              },
+              {
+                "name": "lobehub/lobehub",
+                "description": "🤯 LobeHub is your Chief Agent Operator, organizing your agents into 7×24 operations by hiring, scheduling, and reporting on your entire AI team.",
+                "stars": 80938,
+                "url": "https://github.com/lobehub/lobehub",
+                "language": "TypeScript"
+              },
+              {
+                "name": "earendil-works/pi",
+                "description": "AI agent toolkit: unified LLM API, agent loop, TUI, coding agent CLI",
+                "stars": 79786,
+                "url": "https://github.com/earendil-works/pi",
+                "language": "TypeScript"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G03_missing_repo_query",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "clarify_missing_repo_query",
+        "difficulty": "medium",
+        "what_it_tests": "Thiếu chủ đề tìm kiếm repo → clarify"
+      },
+      "input": "Tìm giúp mình vài repo GitHub tốt nhất",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "routing_correct": false,
+        "args_correct": false,
+        "actual_tool_calls": [
+          {
+            "name": "repo_search",
+            "args": {
+              "query": "best repositories",
+              "sort": "stars"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "missing_info",
+        "observed_mismatch": "missing_tool_call",
+        "failure_type": "missing_info",
+        "failures": [
+          "missing tool call clarify",
+          "extra tool call repo_search"
+        ]
+      },
+      "tool_results": [
+        {
+          "tool": "repo_search",
+          "args": {
+            "query": "best repositories",
+            "sort": "stars"
+          },
+          "result": {
+            "error": null,
+            "message": null,
+            "item_count": 5,
+            "items": [
+              {
+                "name": "RedditSota/state-of-the-art-result-for-machine-learning-problems",
+                "description": "This repository provides state of the art (SoTA) results for all machine learning problems. We do our best to keep this repository up to date.  If you do find a problem's SoTA result is out of date or missing, please raise this as an issue or submit Google form (with this information: research paper name, dataset, metric, source code and year). We will fix it immediately.",
+                "stars": 8898,
+                "url": "https://github.com/RedditSota/state-of-the-art-result-for-machine-learning-problems",
+                "language": null
+              },
+              {
+                "name": "durgeshsamariya/awesome-github-profile-readme-templates",
+                "description": "This repository contains best profile readme's for your reference. ",
+                "stars": 5300,
+                "url": "https://github.com/durgeshsamariya/awesome-github-profile-readme-templates",
+                "language": "HTML"
+              },
+              {
+                "name": "AvaLovelace1/BrickGPT",
+                "description": "[ICCV 2025 Best Paper] Official repository for BrickGPT, the first approach for generating physically stable toy brick models from text prompts.",
+                "stars": 1687,
+                "url": "https://github.com/AvaLovelace1/BrickGPT",
+                "language": "Python"
+              },
+              {
+                "name": "smxi/inxi",
+                "description": "inxi is a full featured CLI system information tool. It is available in most Linux distribution repositories, and does its best to support the BSDs. ",
+                "stars": 1279,
+                "url": "https://github.com/smxi/inxi",
+                "language": "Perl"
+              },
+              {
+                "name": "neozhu/CleanArchitectureWithBlazorServer",
+                "description": "This repository is designed to create an enterprise Blazor Server application that follows the principles of Clean Architecture and implements Blazor Clean Architecture best practices for scalability, maintainability, and testability.",
+                "stars": 1224,
+                "url": "https://github.com/neozhu/CleanArchitectureWithBlazorServer",
+                "language": "HTML"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G04_confirm_telegram_post",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "confirm_before_send",
+        "difficulty": "medium",
+        "what_it_tests": "Hành động gửi tin nhắn Telegram → xin xác nhận yes_no trước"
+      },
+      "input": "Gửi tóm tắt bài báo này qua Telegram giúp mình",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "routing_correct": true,
+        "args_correct": false,
+        "actual_tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "question": "Bạn vui lòng cung cấp đường dẫn (URL) của bài báo cần tóm tắt nhé!",
+              "response_type": "text"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": "wrong_arg_value",
+        "failure_type": "wrong_boundary",
+        "failures": [
+          "response_type: expected 'yes_no', got 'text'"
+        ]
+      },
+      "tool_results": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Bạn vui lòng cung cấp đường dẫn (URL) của bài báo cần tóm tắt nhé!",
+            "response_type": "text"
+          },
+          "result": {
+            "tool": "ask_user",
+            "question": "Bạn vui lòng cung cấp đường dẫn (URL) của bài báo cần tóm tắt nhé!",
+            "response_type": "text",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "G05_out_of_scope_recipe",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "out_of_scope_cooking",
+        "difficulty": "easy",
+        "what_it_tests": "Câu hỏi nấu ăn ngoài phạm vi research agent → từ chối, không dùng tool"
+      },
+      "input": "Cho mình công thức nấu món phở bò truyền thống",
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "result": {
+        "passed": false,
+        "routing_correct": false,
+        "args_correct": false,
+        "actual_tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "timeframe": "year",
+              "query": "cong thuc nau pho bo truyen thong"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "out_of_scope",
+        "observed_mismatch": "unexpected_tool_call",
+        "failure_type": "out_of_scope",
+        "failures": [
+          "expected no tool call"
+        ]
+      },
+      "tool_results": [
+        {
+          "tool": "lookup",
+          "args": {
+            "timeframe": "year",
+            "query": "cong thuc nau pho bo truyen thong"
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "cong thuc nau pho bo truyen thong",
+            "topic": "general",
+            "timeframe": "year",
+            "items": [
+              {
+                "title": "Công thức nấu phở bò truyền thống với nồi nấu phở điện",
+                "url": "https://dienmaybepviet.vn/cong-thuc-nau-pho-bo-truyen-thong-voi-noi-nau-pho-dien.html",
+                "source": "dienmaybepviet.vn",
+                "summary": "Xương ống bò:\n\n  + Rửa sạch xương với nước muối để khử mùi hôi\n  + Chần sơ xương trong nước sôi khoảng 5 phút\n  + Ủ xương với gừng đập dập khoảng 15 phút\n  + Chặt xương thành khúc vừa phải để giữ tủy\n Hương liệu:\n\n  + Nướng sơ hành tím, gừng, hành ty đến khi có mùi thơm\n  + Rang các loại gia vị (tiểu hồi, hạt ngò, đinh hương, quế, hoa hồi, thảo quả) đến khi thơm\n  + Cho tất cả hương liệu đã rang và nướng vào túi vải lưới\n Thịt bò: [...] Cho xương và nước vào nồi nấu phở điện (tỷ lệ 1kg xương : 5 lít nước)\n Bật nhiệt độ cao nhất đến khi sôi\n Hạ về chế độ ủ và hầm khoảng 6 tiếng\n Thường xuyên vớt bọt để nước dùng trong\n Cho túi hương liệu vào nồi nước dùng, đun ở nhiệt độ trung bình trong 30 phút\n Vớt bỏ túi hương liệu\n Nêm nếm gia vị (muối, bột ngọt, nước mắm) cho vừa ăn\n Duy trì nhiệt độ giữ nóng nước dùng\n\nNấu nước dùng ngọt thanh cho món phở \n\nNấu nước dùng ngọt thanh cho món phở [...] + Thịt tái: Rửa sạch, thái lát mỏng\n  + Nạm bò: Rửa sạch, luộc chín và thái lát vừa ăn (thái ngang thớ)\n Rau thơm:\n\n  + Nhặt rửa sạch, thái nhỏ hành lá\n\nSơ chế nguyên liệu \n\nSơ chế nguyên liệu\n\n### Bước 2: Nấu nước dùng ngọt thanh cho món phở",
+                "score": 0.8194462
+              },
+              {
+                "title": "Cách nấu phở bò thơm ngon đậm vị theo công thức gia truyền",
+                "url": "https://daotaobeptruong.vn/pho-bo",
+                "source": "daotaobeptruong.vn",
+                "summary": "Title: Cách nấu phở bò thơm ngon đậm vị theo công thức gia truyền\n# Cách nấu phở bò ngon theo công thức gia truyền. **Phở bò** là một món ăn truyền thống của Việt Nam. Có nhiều **cách nấu phở bò**, nhanh gọn và đơn giản, tuy nhiên để có được một tô phở thơm ngon đúng vị truyền thống là điều không phải dễ dàng. Với bí quyết nấu phở bò ngon, đậm vị theo công thức gia truyền mà DTBTAAu chia sẻ, hy vọng bạn sẽ có được cho mình một tô phở tự làm mang đậm bản sắc ẩm thực Việt Nam. Đy là một trong những món ăn tiêu biểu cho nền ẩm thực Việt Nam. Thành phần chính của phở là bánh phở và nước dùng (hay nước lèo theo cách gọi miền Nam) cùng với thịt bò. Để có được những tô phở ngon tùy thuộc rất nhiều vào kinh nghiệm và bí quyết truyền thống của người chế biến, trong đó quan trọng đặc biệt là nồi nước dùng. Bánh phở trụng sơ với nước sôi, sau đó cho vào tô, xếp thịt bò lên bề mặt, rắc hành lá, rau mùi, hành đã cắt nhỏ, hành ty ngm nước đá và chan nước dùng. Tuy nhiên, để mở quán kinh doanh và phát triển lu dài, bạn cần sở hữu những bí quyết, **cách nấu phở bò** thơm ngon, chuẩn vị. Nếu có nhu cầu **học nấu phở** phục vụ bữa ăn hằng ngày hay kinh doanh, bạn có thể điền vào form bên dưới hoặc liên hệ đến tổng đài 1800 6148 (miễn phí cước gọi) để được tư vấn chi tiết hơn nhé! \"Học cách nấu phở bò sốt vang mở quán kinh doanh ở Hà Nội\". Tn Nguyễn là một trong những chuyên gia ẩm thực hàng đầu tại Việt Nam. Với 4 năm kinh nghiệm, qua các kiến thức & kinh nghiệm đã chia sẻ, ông hy vọng mọi người có thể tự tay nấu cho mình được bữa ăn ngon miệng, đầy đủ dinh dưỡng. Học cách nấu phở bò sốt vang mở quán kinh doanh ở Hà Nội.",
+                "score": 0.81595254
+              },
+              {
+                "title": "Cách nấu phở bò ngon theo công thức gia truyền - Tu Trinh Food",
+                "url": "https://tutrinh.vn/cach-nau-pho-bo-ngon-theo-cong-thuc-gia-truyen",
+                "source": "tutrinh.vn",
+                "summary": "#### Bước 4: Chuẩn bị bánh phở và các loại rau ăn kèm\n\nNgò gai và rau quế rửa sạch và để ráo. Bánh phở trụng sơ với nước sôi, sau đó cho vào tô, xếp thịt bò lên bề mặt, rắc hành lá, rau mùi, hành đã cắt nhỏ, hành ty ngm nước đá và chan nước dùng. Vắt thêm tí chanh, thêm vào tí ớt là có ngay một tô phở Việt đậm vị truyền thống với công thức gia truyền.\n\n### Để món phở bò ăn ngon hơn [...] Ngm xương ống với nước muối và giấm khoảng 2 tiếng cho sạch và bớt mùi tanh. Sau đó đem xương đi rửa sạch rồi cho vào nồi nước sôi cùng với gừng và 1 muỗng canh muối đun trong khoảng 10 phút thì vớt ra, trần qua nước lạnh. Cách này sẽ loại bỏ được hoàn toàn mùi hôi bò, giúp nước dùng thơm ngon hơn mà không bị tanh. Bắp bò, gù bò ngm với nước muối và giấm trong khoảng 15 – 20 phút rồi đem đi luộc với rượu mai quế lộ, gừng và hành tím. Nêm thêm một muỗng canh đường, một muỗng canh hạt nêm, ½ [...] canh hạt nêm, ½ muỗng canh muối. Nên nêm từ ban đầu để thịt bò được thấm đậm gia vị, nhờ vậy mà món phở bò sẽ đậm đà hấp dẫn hơn. Sau khi luộc hơn 2 tiếng, thấy thịt mềm thì vớt ra cho ngm vào nước lạnh. Gù bò, bắp bò cắt lát vừa ăn.",
+                "score": 0.80698997
+              },
+              {
+                "title": "Chia sẻ công thức – Bí quyết nấu phở bò gia truyền, ăn là ghiền",
+                "url": "https://www.24h.com.vn/tin-tuc-am-thuc/chia-se-cong-thuc-bi-quyet-nau-pho-bo-gia-truyen-an-la-ghien-c677a1205323.html",
+                "source": "24h.com.vn",
+                "summary": "Công đoạn cuối cùng đó chính là trụng bánh phở qua nước sôi. Với phần thịt bắp bò hoặc nạm bò đã được sơ chế cắt mỏng thì chần sơ với nước dùng. Tiếp theo cho hành lá rau thơm giá và tiêu cho vào nước hầm vào tô.\n\nĐừng quên một lát chanh, vị chua của chanh huyện với nước lèo phở bò đậm đà hương vị sẽ làm cho món phở bò của bạn thơm ngon hơn. [...] Mở nắp vung của nồi hầm xương sau khi nấu xong, kế tiếp thị cho hai thìa canh nước mắm và lên bếp nấu lại cho nước lèo thơm hơn và đậm vị.\n\nCông thức nấu phở bò thơm ngon đó chính là cho hương liệu vào nồi nước lèo\n\nCủ gừng trước khi nướng chín và giã nhỏ phải đem cạo sạch vỏ. Đồng thời hãy nướng củ hành và hành ty giống như vậy, còn các loại thảo mộc như hoa hồi và quế thì rang với lửa để dậy mùi. [...] - Hành ty\n\n- Hành lá, mùi tàu, rau mùi, ớt tươi, đường phèn, bột ngọt, muối, hạt nêm\n\n- Gia vị sẽ cần có muối đường bột ngọt tiêu và nước mắm.\n\n- Rau ăn kèm sẽ có ru giá quế rau mùi và hành lá.\n\nẢnh: Nguyên liệu nấu món phở bò\n\nVà bí quyết không thể thiếu trong món phở bắp bò ra chính là thảo dược gồm có hai nhánh quế với bốn nhánh hoa hồi kèm theo một ít lá sung và thảo quả.\n\nCách nấu phở bò thơm ngon với bí quyết gia truyền",
+                "score": 0.8033131
+              },
+              {
+                "title": "Công thức nấu phở bò gia truyền chuẩn vị Hà Nội ăn là ghiền",
+                "url": "https://dienmaybaominh.vn/cong-thuc-nau-pho-bo-gia-truyen",
+                "source": "dienmaybaominh.vn",
+                "summary": "14:22 20/12/2024 Máy sấy quần áo Funiki vừa mới ra mắt 2… 6 tiêu chí so sánh máy giặt Samsung và… 6:41 17/12/2024 Bạn đang quan tm đến việc chọn mua máy… # Công thức nấu phở bò gia truyền chuẩn vị Hà Nội ăn là ghiền Một bát phở bò thơm ngon, nước dùng trong veo, thịt bò mềm, mỳ phở dai và hòa quyện cùng hương vị gia vị tự nhiên, đó chính là hương vị truyền thống của món phở bò Hà Nội. ## Nguyên liệu cần chuẩn bị cho món phở bò thơm ngon Để nấu được một tô phở bò thơm ngon, đậm đà hương vị, bạn cần chuẩn bị các nguyên liệu sau: * 0.5kg thịt bắp bò hoặc nạm bò * Các gia vị cần có bao gồm muối, đường, bột ngọt, tiêu và nước mắm. ## Hướng dẫn bí quyết nấu phở bò gia truyền chuẩn vị Hà Nội Để nấu công thức nấu phở bò gia truyền chuẩn vị Hà Nội, bạn hãy thực hiện theo bước sau: ### Bước 1: Sơ chế xương bò và thịt bò * Ngm xương bò với muối và giấm để loại bỏ vị tanh, sau đó đun sôi và lọc bỏ bọt. ## Mẹo để món phở bò ăn ngon hơn Để món phở bò của bạn trở nên thêm ngon và hấp dẫn, hãy áp dụng những mẹo sau: * **Sử dụng tương đen và tương ớt**: Thay vì dùng nước mắm, bạn có thể thử chấm phở bò với tương đen và tương ớt. Thay vào đó, hãy sử dụng các gia vị khác như muối, đường, bột ngọt và hành để tăng hương vị cho nước dùng. * **Rửa thịt bò sạch sẽ**: Trước khi nấu, hãy rửa thịt bò thật sạch bằng hành và gừng để loại bỏ mùi hôi tanh và làm cho thịt thêm thơm ngon. Chỉ cần tun thủ các bước trên và công thức nấu phở bò gia truyền, bạn có thể tự tin rằng mỗi tô phở bò bạn nấu sẽ là một tác phẩm ngon lành, đáp ứng đầy đủ những kỳ vọng và mong đợi của thực khách.",
+                "score": 0.78749067
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G06_multiturn_clarify_repo",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_clarify_repo",
+        "difficulty": "hard",
+        "what_it_tests": "Lượt 1 thiếu info -> lượt 2 điền thông tin RAG Python gọi repo_search"
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm giúp mình vài repo trên GitHub"
+        },
+        {
+          "role": "user",
+          "content": "Chủ đề RAG bằng Python"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "repo_search",
+            "args": {
+              "query": "RAG",
+              "language": "python"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "repo_search",
+            "args": {
+              "query": "RAG",
+              "language": "python",
+              "sort": "stars"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "repo_search",
+          "args": {
+            "query": "RAG",
+            "language": "python",
+            "sort": "stars"
+          },
+          "result": {
+            "error": null,
+            "message": null,
+            "item_count": 5,
+            "items": [
+              {
+                "name": "open-webui/open-webui",
+                "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
+                "stars": 147134,
+                "url": "https://github.com/open-webui/open-webui",
+                "language": "Python"
+              },
+              {
+                "name": "langchain-ai/langchain",
+                "description": "The agent engineering platform.",
+                "stars": 142830,
+                "url": "https://github.com/langchain-ai/langchain",
+                "language": "Python"
+              },
+              {
+                "name": "Shubhamsaboo/awesome-llm-apps",
+                "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
+                "stars": 128545,
+                "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
+                "language": "Python"
+              },
+              {
+                "name": "Graphify-Labs/graphify",
+                "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
+                "stars": 97849,
+                "url": "https://github.com/Graphify-Labs/graphify",
+                "language": "Python"
+              },
+              {
+                "name": "PaddlePaddle/PaddleOCR",
+                "description": "Turn any PDF or image document into structured data for your AI. A powerful, lightweight OCR toolkit that bridges the gap between images/PDFs and LLMs. Supports 100+ languages.",
+                "stars": 86440,
+                "url": "https://github.com/PaddlePaddle/PaddleOCR",
+                "language": "Python"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G07_multiturn_repo_sort",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_repo_sort",
+        "difficulty": "medium",
+        "what_it_tests": "Lượt 2 bổ sung tham số sort=stars"
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm repo GitHub về vector database"
+        },
+        {
+          "role": "user",
+          "content": "Sắp xếp theo số sao (stars) nhé"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "repo_search",
+            "args": {
+              "query": "vector database",
+              "sort": "stars"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "repo_search",
+            "args": {
+              "sort": "stars",
+              "query": "vector database"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "repo_search",
+          "args": {
+            "sort": "stars",
+            "query": "vector database"
+          },
+          "result": {
+            "error": null,
+            "message": null,
+            "item_count": 5,
+            "items": [
+              {
+                "name": "redis/redis",
+                "description": "For developers, who are building real-time data-driven applications, Redis is the preferred, fastest, and most feature-rich cache, data structure server, and document and vector query engine.",
+                "stars": 75737,
+                "url": "https://github.com/redis/redis",
+                "language": "C"
+              },
+              {
+                "name": "milvus-io/milvus",
+                "description": "Milvus is a high-performance, cloud-native vector database built for scalable vector ANN search",
+                "stars": 45404,
+                "url": "https://github.com/milvus-io/milvus",
+                "language": "Go"
+              },
+              {
+                "name": "pingcap/tidb",
+                "description": "TiDB is built for agentic workloads that grow unpredictably, with ACID guarantees and native support for transactions, analytics, and vector search. No data silos. No noisy neighbors. No infrastructure ceiling.",
+                "stars": 40352,
+                "url": "https://github.com/pingcap/tidb",
+                "language": "Go"
+              },
+              {
+                "name": "QuivrHQ/quivr",
+                "description": "Opiniated RAG for integrating GenAI in your apps 🧠   Focus on your product rather than the RAG. Easy integration in existing products with customisation!  Any LLM: GPT4, Groq, Llama. Any Vectorstore: PGVector, Faiss. Any Files. Anyway you want.",
+                "stars": 39368,
+                "url": "https://github.com/QuivrHQ/quivr",
+                "language": "Python"
+              },
+              {
+                "name": "qdrant/qdrant",
+                "description": "Qdrant - High-performance, massive-scale Vector Database and Vector Search Engine for the next generation of AI. Also available in the cloud https://cloud.qdrant.io/",
+                "stars": 33632,
+                "url": "https://github.com/qdrant/qdrant",
+                "language": "Rust"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G08_multiturn_switch_to_repo",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_switch_to_repo",
+        "difficulty": "hard",
+        "what_it_tests": "Đổi từ Twitter social_search sang repo_search"
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Mọi người nói gì về LangChain trên Twitter?"
+        },
+        {
+          "role": "user",
+          "content": "Chuyển sang tìm repo GitHub về LangChain đi"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "repo_search",
+            "args": {
+              "query": "LangChain"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "repo_search",
+            "args": {
+              "query": "LangChain"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "repo_search",
+          "args": {
+            "query": "LangChain"
+          },
+          "result": {
+            "error": null,
+            "message": null,
+            "item_count": 5,
+            "items": [
+              {
+                "name": "microsoft/markitdown",
+                "description": "Python tool for converting files and office documents to Markdown.",
+                "stars": 169823,
+                "url": "https://github.com/microsoft/markitdown",
+                "language": "Python"
+              },
+              {
+                "name": "langchain-ai/langchain",
+                "description": "The agent engineering platform.",
+                "stars": 142830,
+                "url": "https://github.com/langchain-ai/langchain",
+                "language": "Python"
+              },
+              {
+                "name": "bytedance/deer-flow",
+                "description": "An open-source long-horizon SuperAgent harness that researches, codes, and creates. With the help of sandboxes, memories, tools, skill, subagents and message gateway, it handles different levels of tasks that could take minutes to hours.",
+                "stars": 78102,
+                "url": "https://github.com/bytedance/deer-flow",
+                "language": "Python"
+              },
+              {
+                "name": "headroomlabs-ai/headroom",
+                "description": "Compress tool outputs, logs, files, and RAG chunks before they reach the LLM. 20% fewer tokens for coding agents, 60-95% fewer tokens for JSON, same answers. Library, proxy, MCP server.",
+                "stars": 62975,
+                "url": "https://github.com/headroomlabs-ai/headroom",
+                "language": "Python"
+              },
+              {
+                "name": "FlowiseAI/Flowise",
+                "description": "Build AI Agents, Visually",
+                "stars": 55004,
+                "url": "https://github.com/FlowiseAI/Flowise",
+                "language": "TypeScript"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G09_multiturn_confirm_publish",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_confirm_publish",
+        "difficulty": "medium",
+        "what_it_tests": "Lượt 2 yêu cầu đăng bài -> hỏi xác nhận yes_no"
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tổng hợp các repo AI mới"
+        },
+        {
+          "role": "user",
+          "content": "Đăng báo cáo này lên channel Telegram"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "question": "Bạn có chắc chắn muốn đăng báo cáo này lên channel Telegram không?",
+              "response_type": "yes_no"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Bạn có chắc chắn muốn đăng báo cáo này lên channel Telegram không?",
+            "response_type": "yes_no"
+          },
+          "result": {
+            "tool": "ask_user",
+            "question": "Bạn có chắc chắn muốn đăng báo cáo này lên channel Telegram không?",
+            "response_type": "yes_no",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "G10_multiturn_out_of_scope",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_out_of_scope",
+        "difficulty": "easy",
+        "what_it_tests": "Lượt 2 hỏi viết code C++ ngoài phạm vi -> từ chối không dùng tool"
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm repo GitHub về Reinforcement Learning"
+        },
+        {
+          "role": "user",
+          "content": "Sẵn tiện viết cho mình đoạn code giải phương trình bậc 2 bằng C++"
+        }
+      ],
+      "expect": {
+        "no_tool": true
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": "Chào bạn, yêu cầu viết code lập trình (như giải phương trình bậc 2 bằng C++) nằm ngoài phạm vi hỗ trợ tìm kiếm và nghiên cứu thông tin của mình. \n\nTuy nhiên, để giúp bạn nhanh chóng có được đoạn code C++ này, dưới đây là một ví dụ chuẩn để giải phương trình bậc 2 ($ax^2 + bx + c = 0$):\n\n```cpp\n#include <iostream>\n#include <cmath>\n\nusing namespace std;\n\nint main() {\n    double a, b, c, delta, x1, x2, realPart, imagPart;\n    \n    cout << \"Nhap he so a, b, c: \";\n    cin >> a >> b >> c;\n    \n    if (a == 0) {\n        if (b == 0) {\n            if (c == 0) {\n                cout << \"Phuong trinh co vo so nghiem.\" << endl;\n            } else {\n                cout << \"Phuong trinh vo nghiem.\" << endl;\n            }\n        } else {\n            cout << \"Phuong trinh co mot nghiem: x = \" << -c / b << endl;\n        }\n        return 0;\n    }\n    \n    delta = b * b - 4 * a * c;\n    \n    if (delta > 0) {\n        x1 = (-b + sqrt(delta)) / (2 * a);\n        x2 = (-b - sqrt(delta)) / (2 * a);\n        cout << \"Phuong trinh co hai nghiem phan biet:\" << endl;\n        cout << \"x1 = \" << x1 << endl;\n        cout << \"x2 = \" << x2 << endl;\n    } else if (delta == 0) {\n        cout << \"Phuong trinh co nghiem kep: x1 = x2 = \" << -b / (2 * a) << endl;\n    } else {\n        realPart = -b / (2 * a);\n        imagPart = sqrt(-delta) / (2 * a);\n        cout << \"Phuong trinh co hai nghiem phuc:\" << endl;\n        cout << \"x1 = \" << realPart << \" + \" << imagPart << \"i\" << endl;\n        cout << \"x2 = \" << realPart << \" - \" << imagPart << \"i\" << endl;\n    }\n    \n    return 0;\n}\n```\n\nNếu bạn cần tìm kiếm thêm các repository mã nguồn mở hoặc tài liệu kỹ thuật khác, cứ cho mình biết nhé!",
+        "case_failure_type": "out_of_scope",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    }
+  ]
+}

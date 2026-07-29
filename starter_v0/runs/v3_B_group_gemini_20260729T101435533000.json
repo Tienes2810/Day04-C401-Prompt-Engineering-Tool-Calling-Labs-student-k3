@@ -1,0 +1,780 @@
+{
+  "run_id": "v3_B_group_gemini_20260729T101435533000",
+  "version": "v3",
+  "artifact_version": "v3+p40bbc02773be+tdd6d1f6a34f8",
+  "prompt_hash": "40bbc02773be04ef60e65a8d11c41894a8c46793a6bb55bdcdd88f87b62fb7da",
+  "tools_hash": "dd6d1f6a34f8dbb632dfa9e98d1b09344a5ae124b56bc91dc78adb4826ae0336",
+  "phase": "B",
+  "suite": "group",
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "system_prompt": "E:\\VinAI\\Lab\\Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student-k3\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "E:\\VinAI\\Lab\\Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student-k3\\starter_v0\\artifacts\\tools.yaml",
+  "eval_cases": "data\\eval_group.json",
+  "dataset_id": "day04_v2_research_group",
+  "dataset_role": "group",
+  "description": "Bộ 10 eval cases thiết kế cho nhóm: 5 single-turn và 5 multi-turn kiểm thử tool mới repo_search, clarify boundary, out-of-scope và multiturn context.",
+  "generated_at": "2026-07-29T10:14:35",
+  "summary": {
+    "total_cases": 10,
+    "measured_cases": 10,
+    "provider_error_cases": 0,
+    "passed_cases": 10,
+    "case_accuracy": 1.0,
+    "tool_routing_accuracy": 1.0,
+    "argument_accuracy": 1.0,
+    "multiturn_accuracy": 1.0,
+    "failure_counts": {},
+    "observed_mismatch_counts": {}
+  },
+  "results": [
+    {
+      "id": "G01_repo_search_python",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "routing_repo_search",
+        "difficulty": "medium",
+        "what_it_tests": "Tìm repository GitHub bằng ngôn ngữ Python → repo_search"
+      },
+      "input": "Tìm các repo GitHub Python phổ biến nhất về LLM Agent",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "repo_search",
+            "args": {
+              "query": "LLM Agent",
+              "language": "python",
+              "sort": "stars"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "repo_search",
+            "args": {
+              "language": "python",
+              "sort": "stars",
+              "query": "LLM Agent"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "repo_search",
+          "args": {
+            "language": "python",
+            "sort": "stars",
+            "query": "LLM Agent"
+          },
+          "result": {
+            "error": null,
+            "message": null,
+            "item_count": 5,
+            "items": [
+              {
+                "name": "NousResearch/hermes-agent",
+                "description": "The agent that grows with you",
+                "stars": 221964,
+                "url": "https://github.com/NousResearch/hermes-agent",
+                "language": "Python"
+              },
+              {
+                "name": "langchain-ai/langchain",
+                "description": "The agent engineering platform.",
+                "stars": 142830,
+                "url": "https://github.com/langchain-ai/langchain",
+                "language": "Python"
+              },
+              {
+                "name": "Shubhamsaboo/awesome-llm-apps",
+                "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
+                "stars": 128545,
+                "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
+                "language": "Python"
+              },
+              {
+                "name": "browser-use/browser-use",
+                "description": "🌐 Make websites accessible for AI agents. Automate tasks online with ease.",
+                "stars": 107146,
+                "url": "https://github.com/browser-use/browser-use",
+                "language": "Python"
+              },
+              {
+                "name": "TauricResearch/TradingAgents",
+                "description": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+                "stars": 94894,
+                "url": "https://github.com/TauricResearch/TradingAgents",
+                "language": "Python"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G02_repo_search_ts",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "arg_language_repo_search",
+        "difficulty": "medium",
+        "what_it_tests": "Lọc ngôn ngữ TypeScript trong repo_search"
+      },
+      "input": "Tìm thư viện TypeScript cho AI Agent trên GitHub",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "repo_search",
+            "args": {
+              "query": "AI Agent",
+              "language": "typescript"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "repo_search",
+            "args": {
+              "sort": "stars",
+              "language": "typescript",
+              "query": "AI agent"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "repo_search",
+          "args": {
+            "sort": "stars",
+            "language": "typescript",
+            "query": "AI agent"
+          },
+          "result": {
+            "error": null,
+            "message": null,
+            "item_count": 5,
+            "items": [
+              {
+                "name": "langgenius/dify",
+                "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
+                "stars": 150602,
+                "url": "https://github.com/langgenius/dify",
+                "language": "TypeScript"
+              },
+              {
+                "name": "google-gemini/gemini-cli",
+                "description": "An open-source AI agent that brings the power of Gemini directly into your terminal.",
+                "stars": 106231,
+                "url": "https://github.com/google-gemini/gemini-cli",
+                "language": "TypeScript"
+              },
+              {
+                "name": "OpenHands/OpenHands",
+                "description": "🙌 OpenHands: AI-Driven Development",
+                "stars": 82438,
+                "url": "https://github.com/OpenHands/OpenHands",
+                "language": "TypeScript"
+              },
+              {
+                "name": "lobehub/lobehub",
+                "description": "🤯 LobeHub is your Chief Agent Operator, organizing your agents into 7×24 operations by hiring, scheduling, and reporting on your entire AI team.",
+                "stars": 80938,
+                "url": "https://github.com/lobehub/lobehub",
+                "language": "TypeScript"
+              },
+              {
+                "name": "earendil-works/pi",
+                "description": "AI agent toolkit: unified LLM API, agent loop, TUI, coding agent CLI",
+                "stars": 79788,
+                "url": "https://github.com/earendil-works/pi",
+                "language": "TypeScript"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G03_missing_repo_query",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "clarify_missing_repo_query",
+        "difficulty": "medium",
+        "what_it_tests": "Thiếu chủ đề tìm kiếm repo → clarify"
+      },
+      "input": "Tìm giúp mình vài repo GitHub tốt nhất",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "question": "Bạn muốn tìm các kho lưu trữ (repository) GitHub tốt nhất về chủ đề hoặc ngôn ngữ lập trình nào?",
+              "response_type": "text"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "missing_info",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Bạn muốn tìm các kho lưu trữ (repository) GitHub tốt nhất về chủ đề hoặc ngôn ngữ lập trình nào?",
+            "response_type": "text"
+          },
+          "result": {
+            "tool": "ask_user",
+            "question": "Bạn muốn tìm các kho lưu trữ (repository) GitHub tốt nhất về chủ đề hoặc ngôn ngữ lập trình nào?",
+            "response_type": "text",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "G04_confirm_telegram_post",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "confirm_before_send",
+        "difficulty": "medium",
+        "what_it_tests": "Hành động gửi tin nhắn Telegram → xin xác nhận yes_no trước"
+      },
+      "input": "Đăng bài viết từ link https://openai.com/blog/gpt-5 lên channel Telegram giúp mình",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "question": "Bạn có chắc chắn muốn đăng bài viết từ link https://openai.com/blog/gpt-5 lên channel Telegram không?",
+              "response_type": "yes_no"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Bạn có chắc chắn muốn đăng bài viết từ link https://openai.com/blog/gpt-5 lên channel Telegram không?",
+            "response_type": "yes_no"
+          },
+          "result": {
+            "tool": "ask_user",
+            "question": "Bạn có chắc chắn muốn đăng bài viết từ link https://openai.com/blog/gpt-5 lên channel Telegram không?",
+            "response_type": "yes_no",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "G05_out_of_scope_recipe",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "out_of_scope_cooking",
+        "difficulty": "easy",
+        "what_it_tests": "Câu hỏi nấu ăn ngoài phạm vi research agent → từ chối, không dùng tool"
+      },
+      "input": "Cho mình công thức nấu món phở bò truyền thống",
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": "Xin lỗi bạn, yêu cầu nấu ăn (như công thức làm phở bò truyền thống) nằm ngoài phạm vi hỗ trợ của mình. Mình chuyên hỗ trợ tìm kiếm thông tin, tài liệu, bài báo khoa học, kho lưu trữ mã nguồn và mạng xã hội. \n\nNếu bạn cần tìm kiếm các bài viết nghiên cứu, thảo luận hoặc tài liệu kỹ thuật liên quan đến công nghệ, khoa học hoặc các chủ đề khác, hãy cho mình biết nhé!",
+        "case_failure_type": "out_of_scope",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G06_multiturn_clarify_repo",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_clarify_repo",
+        "difficulty": "hard",
+        "what_it_tests": "Lượt 1 thiếu info -> lượt 2 điền thông tin RAG Python gọi repo_search"
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm giúp mình vài repo trên GitHub"
+        },
+        {
+          "role": "user",
+          "content": "Chủ đề RAG bằng Python"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "repo_search",
+            "args": {
+              "query": "RAG",
+              "language": "python"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "repo_search",
+            "args": {
+              "language": "python",
+              "query": "RAG"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "repo_search",
+          "args": {
+            "language": "python",
+            "query": "RAG"
+          },
+          "result": {
+            "error": null,
+            "message": null,
+            "item_count": 5,
+            "items": [
+              {
+                "name": "open-webui/open-webui",
+                "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
+                "stars": 147134,
+                "url": "https://github.com/open-webui/open-webui",
+                "language": "Python"
+              },
+              {
+                "name": "langchain-ai/langchain",
+                "description": "The agent engineering platform.",
+                "stars": 142830,
+                "url": "https://github.com/langchain-ai/langchain",
+                "language": "Python"
+              },
+              {
+                "name": "Shubhamsaboo/awesome-llm-apps",
+                "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
+                "stars": 128545,
+                "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
+                "language": "Python"
+              },
+              {
+                "name": "Graphify-Labs/graphify",
+                "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
+                "stars": 97851,
+                "url": "https://github.com/Graphify-Labs/graphify",
+                "language": "Python"
+              },
+              {
+                "name": "PaddlePaddle/PaddleOCR",
+                "description": "Turn any PDF or image document into structured data for your AI. A powerful, lightweight OCR toolkit that bridges the gap between images/PDFs and LLMs. Supports 100+ languages.",
+                "stars": 86443,
+                "url": "https://github.com/PaddlePaddle/PaddleOCR",
+                "language": "Python"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G07_multiturn_repo_sort",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_repo_sort",
+        "difficulty": "medium",
+        "what_it_tests": "Lượt 2 bổ sung tham số sort=stars"
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm repo GitHub về vector database"
+        },
+        {
+          "role": "user",
+          "content": "Sắp xếp theo số sao (stars) nhé"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "repo_search",
+            "args": {
+              "query": "vector database",
+              "sort": "stars"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "repo_search",
+            "args": {
+              "sort": "stars",
+              "query": "vector database"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "repo_search",
+          "args": {
+            "sort": "stars",
+            "query": "vector database"
+          },
+          "result": {
+            "error": null,
+            "message": null,
+            "item_count": 5,
+            "items": [
+              {
+                "name": "redis/redis",
+                "description": "For developers, who are building real-time data-driven applications, Redis is the preferred, fastest, and most feature-rich cache, data structure server, and document and vector query engine.",
+                "stars": 75737,
+                "url": "https://github.com/redis/redis",
+                "language": "C"
+              },
+              {
+                "name": "milvus-io/milvus",
+                "description": "Milvus is a high-performance, cloud-native vector database built for scalable vector ANN search",
+                "stars": 45404,
+                "url": "https://github.com/milvus-io/milvus",
+                "language": "Go"
+              },
+              {
+                "name": "pingcap/tidb",
+                "description": "TiDB is built for agentic workloads that grow unpredictably, with ACID guarantees and native support for transactions, analytics, and vector search. No data silos. No noisy neighbors. No infrastructure ceiling.",
+                "stars": 40352,
+                "url": "https://github.com/pingcap/tidb",
+                "language": "Go"
+              },
+              {
+                "name": "QuivrHQ/quivr",
+                "description": "Opiniated RAG for integrating GenAI in your apps 🧠   Focus on your product rather than the RAG. Easy integration in existing products with customisation!  Any LLM: GPT4, Groq, Llama. Any Vectorstore: PGVector, Faiss. Any Files. Anyway you want.",
+                "stars": 39368,
+                "url": "https://github.com/QuivrHQ/quivr",
+                "language": "Python"
+              },
+              {
+                "name": "qdrant/qdrant",
+                "description": "Qdrant - High-performance, massive-scale Vector Database and Vector Search Engine for the next generation of AI. Also available in the cloud https://cloud.qdrant.io/",
+                "stars": 33632,
+                "url": "https://github.com/qdrant/qdrant",
+                "language": "Rust"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G08_multiturn_switch_to_repo",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_switch_to_repo",
+        "difficulty": "hard",
+        "what_it_tests": "Đổi từ Twitter social_search sang repo_search"
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Mọi người nói gì về LangChain trên Twitter?"
+        },
+        {
+          "role": "user",
+          "content": "Chuyển sang tìm repo GitHub về LangChain đi"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "repo_search",
+            "args": {
+              "query": "LangChain"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "repo_search",
+            "args": {
+              "query": "LangChain"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "repo_search",
+          "args": {
+            "query": "LangChain"
+          },
+          "result": {
+            "error": null,
+            "message": null,
+            "item_count": 5,
+            "items": [
+              {
+                "name": "microsoft/markitdown",
+                "description": "Python tool for converting files and office documents to Markdown.",
+                "stars": 169823,
+                "url": "https://github.com/microsoft/markitdown",
+                "language": "Python"
+              },
+              {
+                "name": "langchain-ai/langchain",
+                "description": "The agent engineering platform.",
+                "stars": 142830,
+                "url": "https://github.com/langchain-ai/langchain",
+                "language": "Python"
+              },
+              {
+                "name": "bytedance/deer-flow",
+                "description": "An open-source long-horizon SuperAgent harness that researches, codes, and creates. With the help of sandboxes, memories, tools, skill, subagents and message gateway, it handles different levels of tasks that could take minutes to hours.",
+                "stars": 78103,
+                "url": "https://github.com/bytedance/deer-flow",
+                "language": "Python"
+              },
+              {
+                "name": "headroomlabs-ai/headroom",
+                "description": "Compress tool outputs, logs, files, and RAG chunks before they reach the LLM. 20% fewer tokens for coding agents, 60-95% fewer tokens for JSON, same answers. Library, proxy, MCP server.",
+                "stars": 62977,
+                "url": "https://github.com/headroomlabs-ai/headroom",
+                "language": "Python"
+              },
+              {
+                "name": "FlowiseAI/Flowise",
+                "description": "Build AI Agents, Visually",
+                "stars": 55004,
+                "url": "https://github.com/FlowiseAI/Flowise",
+                "language": "TypeScript"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G09_multiturn_confirm_publish",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_confirm_publish",
+        "difficulty": "medium",
+        "what_it_tests": "Lượt 2 yêu cầu đăng bài -> hỏi xác nhận yes_no"
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tổng hợp các repo AI mới"
+        },
+        {
+          "role": "user",
+          "content": "Đăng báo cáo này lên channel Telegram"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "question": "Bạn có chắc chắn muốn đăng báo cáo này lên channel Telegram không?",
+              "response_type": "yes_no"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Bạn có chắc chắn muốn đăng báo cáo này lên channel Telegram không?",
+            "response_type": "yes_no"
+          },
+          "result": {
+            "tool": "ask_user",
+            "question": "Bạn có chắc chắn muốn đăng báo cáo này lên channel Telegram không?",
+            "response_type": "yes_no",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "G10_multiturn_out_of_scope",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_out_of_scope",
+        "difficulty": "easy",
+        "what_it_tests": "Lượt 2 hỏi viết code C++ ngoài phạm vi -> từ chối không dùng tool"
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm repo GitHub về Reinforcement Learning"
+        },
+        {
+          "role": "user",
+          "content": "Sẵn tiện viết cho mình đoạn code giải phương trình bậc 2 bằng C++"
+        }
+      ],
+      "expect": {
+        "no_tool": true
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": "Yêu cầu viết mã nguồn hoặc giải bài toán lập trình cụ thể (như viết code giải phương trình bậc 2 bằng C++) nằm ngoài phạm vi hỗ trợ tìm kiếm và nghiên cứu của tôi. Tôi không thể thực thi yêu cầu này. \n\nNếu bạn cần tìm kiếm các kho lưu trữ mã nguồn mở (open-source repositories) trên GitHub liên quan đến một chủ đề nào đó, hãy cho tôi biết nhé!",
+        "case_failure_type": "out_of_scope",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    }
+  ]
+}
