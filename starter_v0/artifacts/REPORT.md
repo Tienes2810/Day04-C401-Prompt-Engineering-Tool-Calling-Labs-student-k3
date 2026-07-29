@@ -4,10 +4,10 @@
 
 - Team: Group AI20K - Day 04 Research Agent
 - Members:
-  - Lê Hoàng Việt (MSSV: 2A202601543) - Leader / Prompt & Eval
-  - Trần Tiến Dũng (MSSV: 2A202601783) - Tool Developer
-  - Nguyễn Thiên Tài (MSSV: 2A202601849) - UI & Integration
-  - Nguyễn Tiến (MSSV: 2A202601655) - Reporter & Testing
+  - Trần Tiến Dũng (MSSV: 2A202601783) - Leader / Tool Developer
+  - Lê Hoàng Việt (MSSV: 2A202601543) - Member / Prompt & Eval
+  - Nguyễn Thiên Tài (MSSV: 2A202601849) - Member / UI & Integration
+  - Nguyễn Tiến (MSSV: 2A202601655) - Member / Reporter & Testing
 - Provider/model: Gemini / `gemini-3.5-flash-lite`
 
 ---
